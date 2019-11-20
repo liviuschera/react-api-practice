@@ -6,21 +6,21 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      monsters: []
+      robots: []
     };
   }
 
   async componentDidMount() {
-    const monsters = await fetch(
+    const robots = await fetch(
       "https://jsonplaceholder.typicode.com/users"
     ).then(results => results.json());
-    this.setState({ monsters });
+    this.setState({ robots });
   }
 
   render() {
     return (
       <div className="App">
-        <CardList monsters={this.state.monsters}></CardList>
+        <CardList robots={this.state.robots}></CardList>
       </div>
     );
   }

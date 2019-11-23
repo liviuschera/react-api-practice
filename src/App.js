@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 // import { render } from "react-dom";
 import { CardList } from "./components/card-list/card-list.component";
-import { SearchRobots } from "./components/search-robots/search-robots.component";
+// import { SearchRobots } from "./components/search-robots/search-robots.component";
+// import { SearchContext } from "./components/search-robots/search-context.component";
 import "./App.css";
 
 // class App extends React.Component {
@@ -35,21 +36,31 @@ import "./App.css";
 
 const App = () => {
   const [robots, setRobots] = useState([]);
+  const [searchField, setSearchField] = useState("");
 
   useEffect(() => {
     async function getUsers(params) {
-      const result = await fetch(
+      const fetchedRobots = await fetch(
         "https://jsonplaceholder.typicode.com/users"
       ).then(results => results.json());
-      setRobots(result);
+      let filteredRots = fetchedRobots.filter(robot =>
+        robot.name.toLowerCase().includes(searchField)
+      );
+      setRobots(filteredRots);
+      // setRobots(fetchedRobots);
     }
     getUsers();
-  });
+  }, [searchField]);
 
   return (
     <div className="App">
-      <SearchRobots robots={robots}></SearchRobots>
-      <CardList robots={robots}></CardList>
+      {/* <SearchRobots robots={robots}></SearchRobots> */}
+      <input
+        type="search"
+        placeholder="search robots"
+        onChange={event => setSearchField(event.target.value)}
+      />
+      <CardList robots={robots} searched={searchField}></CardList>
     </div>
   );
 };

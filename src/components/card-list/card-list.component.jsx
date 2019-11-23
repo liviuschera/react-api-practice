@@ -3,7 +3,7 @@ import { Card } from "../card/card.component";
 import "./card-list.styles.css";
 
 export const CardList = props => {
-  console.log(props);
+  console.log(`cardlist : ${props}`);
 
   return (
     <div className="card-list">

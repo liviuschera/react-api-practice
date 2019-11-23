@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { render } from "react-dom";
 import { CardList } from "./components/card-list/card-list.component";
-// import { SearchRobots } from "./components/search-robots/search-robots.component";
+import { SearchRobots } from "./components/search-robots/search-field.component";
 // import { SearchContext } from "./components/search-robots/search-context.component";
 import "./App.css";
 
@@ -44,23 +44,20 @@ const App = () => {
         "https://jsonplaceholder.typicode.com/users"
       ).then(results => results.json());
       let filteredRots = fetchedRobots.filter(robot =>
-        robot.name.toLowerCase().includes(searchField)
+        robot.name.toLowerCase().includes(searchField.toLowerCase())
       );
       setRobots(filteredRots);
-      // setRobots(fetchedRobots);
     }
     getUsers();
   }, [searchField]);
 
   return (
     <div className="App">
-      {/* <SearchRobots robots={robots}></SearchRobots> */}
-      <input
-        type="search"
-        placeholder="search robots"
-        onChange={event => setSearchField(event.target.value)}
+      <SearchRobots
+        placeholder="search robot"
+        filterRobots={event => setSearchField(event.target.value)}
       />
-      <CardList robots={robots} searched={searchField}></CardList>
+      <CardList robots={robots} />
     </div>
   );
 };

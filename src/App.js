@@ -55,6 +55,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <h1>Robo Monsters</h1>
       <SearchRobots placeholder="search robot" handleChange={handleChange} />
       <CardList robots={robots} />
     </div>

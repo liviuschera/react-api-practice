@@ -51,12 +51,11 @@ const App = () => {
     getUsers();
   }, [searchField]);
 
+  const handleChange = event => setSearchField(event.target.value);
+
   return (
     <div className="App">
-      <SearchRobots
-        placeholder="search robot"
-        filterRobots={event => setSearchField(event.target.value)}
-      />
+      <SearchRobots placeholder="search robot" handleChange={handleChange} />
       <CardList robots={robots} />
     </div>
   );
